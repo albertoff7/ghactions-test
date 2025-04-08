@@ -1,30 +1,25 @@
-name: PR for release branch
+name: Create Pull Request with cherry-pick
 on:
-  workflow_dispatch:
   push:
     branches:
       - dev
 jobs:
-  ejecutar_bash:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Imprimir el GITHUB_TOKEN
-        run: |
-          echo "GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
-          echo "Ejecutando un comando Bash con el token..."
   release_pull_request:
     runs-on: ubuntu-latest
     name: release_pull_request
     steps:
     - name: checkout
       uses: actions/checkout@v1
-    - name: Create PR to branch
+    - name: GHA cherry-pick and PR
       uses: albertoff7/gha-cherry-pick@master
       with:
+        # This is the branch you want to merge your last cherry-picked commit into.
         pr_branch: 'release'
+        # This is the "parent" depth at which cherry-picking do.
         pr_cherry_parent: '1'
       env:
+        # Enviroments variables that we need
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITBOT_EMAIL: <BOT_EMAIL>
+        GITBOT_EMAIL: me@me.me
         DRY_RUN: false
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
