@@ -4,9 +4,9 @@ on:
     branches:
       - dev
 jobs:
-  release_pull_request:
+  create_cherry_pick_and_pull_request:
     runs-on: ubuntu-latest
-    name: release_pull_request
+    name: create_cherry_pick_and_pull_request:
     steps:
     - name: checkout
       uses: actions/checkout@v1
