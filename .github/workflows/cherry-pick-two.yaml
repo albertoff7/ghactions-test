@@ -22,7 +22,7 @@ jobs:
       uses: albertoff7/gha-cherry-pick@master
       with:
         pr_branch: 'release'
-        pr_cherry_parent: '2'
+        pr_cherry_parent: '1'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITBOT_EMAIL: <BOT_EMAIL>
