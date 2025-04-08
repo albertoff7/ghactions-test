@@ -1,0 +1,30 @@
+name: PR for release branch
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+jobs:
+  ejecutar_bash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Imprimir el GITHUB_TOKEN
+        run: |
+          echo "GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
+          echo "Ejecutando un comando Bash con el token..."
+  release_pull_request:
+    runs-on: ubuntu-latest
+    name: release_pull_request
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Create PR to branch
+      uses: albertoff7/gha-cherry-pick@master
+      with:
+        pr_branch: 'release'
+        pr_cherry_parent: '2'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITBOT_EMAIL: <BOT_EMAIL>
+        DRY_RUN: false
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
